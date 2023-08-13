@@ -1,0 +1,19 @@
+{% extends "bootstrap_5_layout.html" %}
+{% set active_page = "audio_features" %}
+
+{% block content %}
+
+    <h2>Playlist URL</h2>
+
+    <p>Please input the playlist url you wanna analyze...</p>
+
+    <form action="/audio/dashboard" method="POST">
+
+        <label>Playlist URL:</label>
+        <input type="text" name="url">
+        <br>
+
+        <button class="btn btn-success">Submit</button>
+    </form>
+
+{% endblock %}

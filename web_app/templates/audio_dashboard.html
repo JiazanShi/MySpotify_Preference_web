@@ -1,0 +1,44 @@
+{% extends "bootstrap_5_layout.html" %}
+{% set active_page = "audio_dashboard" %}
+
+{% block content %}
+
+    <h2>Audio Dashboard </h2>
+
+    <p class="lead">Current Playlist ID: {{ id }} </p>
+
+    <div id="chart-container" height="700px"></div>
+    <div id="chart-container">
+        {{ chart_html | safe }}
+    </div>
+
+    <!--
+        BOOTSTRAP TABLES
+        https://getbootstrap.com/docs/5.0/content/tables/
+    -->
+    <table class="table table-hover table-responsive caption-top">
+        <caption>Feature Data</caption>
+        <thead>
+            <tr>
+                <th scope="col">Feature</th>
+                <th scope="col">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        <!--
+            JINJA FOR LOOP
+            https://jinja.palletsprojects.com/en/3.1.x/templates/
+        -->
+        {% for row in data %}
+            <tr>
+                <td>{{ row["feature"] }}</td>
+                <td>{{ row["value"] }}%</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    
+{% endblock %}

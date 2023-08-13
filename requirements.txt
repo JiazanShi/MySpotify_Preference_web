@@ -1,0 +1,17 @@
+requests
+
+spotipy
+
+python-dotenv
+
+IPython
+
+pandas
+
+plotly
+
+pytest
+
+flask
+
+gunicorn
