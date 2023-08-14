@@ -7,11 +7,6 @@
 
     <p class="lead">You're getting access to {{ owner }} 's playlist {{ name }}, {{num_tracks}} songs in it </p>
 
-    <div id="chart-container" height="700px"></div>
-    <div id="chart-container">
-        {{ chart_html | safe }}
-    </div>
-
     <!--
         BOOTSTRAP TABLES
         https://getbootstrap.com/docs/5.0/content/tables/
@@ -20,6 +15,7 @@
         <caption>Tracks in the playlist</caption>
         <thead>
             <tr>
+                <th scope="col">Album</th>
                 <th scope="col">Track</th>
                 <th scope="col">Artist</th>
             </tr>
@@ -32,6 +28,7 @@
         -->
         {% for row in data %}
             <tr>
+                <td><img src="{{ row['album_cover'] }}" ></td>
                 <td>{{ row["track_name"] }}</td>
                 <td>{{ row["artist_name"] }}</td>
             </tr>
@@ -39,6 +36,11 @@
 
         </tbody>
     </table>
+
+    <div id="chart-container" height="700px"></div>
+    <div id="chart-container">
+        {{ chart_html | safe }}
+    </div>
 
     
 {% endblock %}

@@ -1,5 +1,7 @@
 from flask import Blueprint, request, render_template, redirect, flash
 import plotly.express as px
+from itertools import islice
+
 
 from app.playlist import url_to_id, fetch_playlist, default
 from app.artist import fetch_artists, artist_genres
@@ -34,6 +36,7 @@ def artist_info():
         artists = fetch_artists(df)
         genres = artist_genres(artists)
         artists_dict = artists.to_dict('records')
+        top5_genres = dict(islice(genres.items(), 5))
 
 
         #plot bar chart for artists
@@ -42,7 +45,7 @@ def artist_info():
         fig.update_layout(xaxis={'categoryorder':'total descending'})
         artist_bar_html = fig.to_html(full_html=False, include_plotlyjs='cdn')
 
-        fig2 = px.pie(names=genres.keys(), values=genres.values(),title="Genres")
+        fig2 = px.pie(names=top5_genres.keys(), values=top5_genres.values(),title="Genres")
         genres_html = fig2.to_html(full_html=False, include_plotlyjs='cdn')
 
         #flash("Fetched Real-time Market Data!", "success")

@@ -14,39 +14,12 @@
         {{ artist_chart | safe }}
     </div>
 
-    
+
     <p>Genres in this playlist</p>
     <div id="chart-container">
         {{ genre_chart | safe }}
     </div>
 
-    <!--
-        BOOTSTRAP TABLES
-        https://getbootstrap.com/docs/5.0/content/tables/
-    -->
-    <table class="table table-hover table-responsive caption-top">
-        <caption>Tracks in the playlist</caption>
-        <thead>
-            <tr>
-                <th scope="col">Track</th>
-                <th scope="col">Artist</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        <!--
-            JINJA FOR LOOP
-            https://jinja.palletsprojects.com/en/3.1.x/templates/
-        -->
-        {% for row in data %}
-            <tr>
-                <td>{{ row["track_name"] }}</td>
-                <td>{{ row["artist_name"] }}</td>
-            </tr>
-        {% endfor %}
-
-        </tbody>
-    </table>
 
     
 {% endblock %}
