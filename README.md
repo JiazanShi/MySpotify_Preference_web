@@ -56,6 +56,8 @@ pytest
 
 ## Web
 
+Current web is deployed on Render. Click here to my [spotify playlist platform](https://spotify-playlist-platform.onrender.com/).
+
 This platform has 3 pages: Playlist Details, Artists, Audio Features. Just simply input the playlist URL you want to analyze, you will get the information about this playlist.
 
 The 'Playlist Details' page returns a list of songs and artists in the playlist, and also the popularity of those songs.
