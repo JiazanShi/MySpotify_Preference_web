@@ -28,9 +28,10 @@ def audio_dashboard():
 
     try:
         id = url_to_id(url)
-        df = fetch_playlist(id)
+        df, playlist_name, owner, num_tracks = fetch_playlist(id)
         data = fetch_features(df)
         avg_data = data[music_feature].mean().reset_index().rename(columns={'index':'feature',0:'value'})
+        avg_data['value'] = avg_data['value'].apply(lambda x: round(x,4))
         data_dict = avg_data.to_dict('records')
 
         #plot polar chart
@@ -40,7 +41,9 @@ def audio_dashboard():
 
         #flash("Fetched Real-time Market Data!", "success")
         return render_template("audio_dashboard.html",
-            id=id,
+            name=playlist_name,
+            owner=owner,
+            num_tracks=num_tracks,
             data=data_dict,
             chart_html=chart_html
         )
@@ -65,11 +68,12 @@ def audio():
 
     try:
         id = url_to_id(url)
-        df = fetch_playlist(id)
+        df, playlist_name, owner, num_tracks = fetch_playlist(id)
         data = fetch_features(df)
         avg_data = data[music_feature].mean().reset_index().rename(columns={'index':'feature',0:'value'})
+        avg_data['value'] = avg_data['value'].apply(lambda x: round(x,4))
         data_dict = avg_data.to_dict('records')
-        return {"id": id, "data": data_dict }
+        return {"name": playlist_name, "data": data_dict }
     except Exception as err:
         print('OOPS', err)
         return {"message":"Data Error. Please try again."}, 404

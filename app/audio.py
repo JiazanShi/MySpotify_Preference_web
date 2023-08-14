@@ -8,48 +8,13 @@ import plotly.express as px
 
 #import api keys from api.py
 from app.api import client_id, client_secret
+from app.playlist import url_to_id, fetch_playlist
+
 
 #connect to spotify api
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-def url_to_id(url):
-    ## https://open.spotify.com/playlist/3QJAP3W7ONDac1qIdTsBRJ?si=f8e17f22c0304ee2
-    ## playlist_id is between the 'playlist/' and '?'
-
-    playlist_id = url.split('/')[-1].split('?')[0]
-    return playlist_id
-
-def fetch_playlist(playlist_id):
-    ## fetch playlist, extract data about tracks and artists
-    ## and store in a dataframe
-
-    try:
-        pl = sp.playlist(playlist_id)
-        print(f"You're loading {pl['owner']['display_name']}'s playlist: {pl['name']}")
-        print(f"{len(pl['tracks']['items'])} songs in the current playlist")
-        track_name = []
-        track_id = []
-        track_popularity = []
-        album_cover = []
-        artist_name = []
-        artist_id = []
-
-        for track in pl['tracks']['items']:
-            track_name.append(track['track']['name'])
-            track_id.append(track['track']['id'])
-            track_popularity.append(track['track']['popularity'])
-            album_cover.append(track['track']['album']['images'][2]['url'])
-            artist_name.append(track['track']['artists'][0]['name'])
-            artist_id.append(track['track']['artists'][0]['id'])
-        
-        playlist_df = pd.DataFrame(list(zip(track_name,track_id,track_popularity, album_cover, artist_name,artist_id)),
-                           columns=['track_name','track_id','track_popularity','album_cover','artist_name','artist_id'])
-        
-        return playlist_df
-    
-    except:
-        print("Please input a valid playlist id")
 
 def fetch_features(df):
     ## extract audio features
@@ -91,11 +56,13 @@ if __name__ == "__main__":
     
     id = url_to_id(input_url)
 
-    playlist_df = fetch_playlist(id)
+    playlist_df, playlist_name, owner, num_tracks = fetch_playlist(id)
 
     pl_audio = fetch_features(playlist_df)
 
     avg_features = pl_audio[music_feature].mean().reset_index().rename(columns={'index':'feature',0:'value'})
+    
+    print(avg_features)
     #[pl_audio[i].mean() for i in music_feature]
 
     #fig = px.line_polar(r=avg_features, theta=music_feature, line_close=True)

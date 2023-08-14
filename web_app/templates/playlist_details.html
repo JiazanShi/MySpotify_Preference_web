@@ -1,9 +1,9 @@
 {% extends "bootstrap_5_layout.html" %}
-{% set active_page = "audio_dashboard" %}
+{% set active_page = "Playlist_Details" %}
 
 {% block content %}
 
-    <h2>Audio Dashboard </h2>
+    <h2>Playlist Details </h2>
 
     <p class="lead">You're getting access to {{ owner }} 's playlist {{ name }}, {{num_tracks}} songs in it </p>
 
@@ -17,11 +17,11 @@
         https://getbootstrap.com/docs/5.0/content/tables/
     -->
     <table class="table table-hover table-responsive caption-top">
-        <caption>Feature Data</caption>
+        <caption>Tracks in the playlist</caption>
         <thead>
             <tr>
-                <th scope="col">Feature</th>
-                <th scope="col">Value</th>
+                <th scope="col">Track</th>
+                <th scope="col">Artist</th>
             </tr>
         </thead>
         <tbody>
@@ -32,8 +32,8 @@
         -->
         {% for row in data %}
             <tr>
-                <td>{{ row["feature"] }}</td>
-                <td>{{ row["value"] }}</td>
+                <td>{{ row["track_name"] }}</td>
+                <td>{{ row["artist_name"] }}</td>
             </tr>
         {% endfor %}
 
