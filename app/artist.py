@@ -7,12 +7,12 @@ from itertools import chain
 import plotly.express as px
 
 #import api keys from api.py
-from app.api import client_id, client_secret
+from app.api import SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET
 #import functions from playlist.py
 from app.playlist import url_to_id, fetch_playlist
 
 #connect to spotify api
-client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
+client_credentials_manager = SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 def fetch_artists(playlist_df):

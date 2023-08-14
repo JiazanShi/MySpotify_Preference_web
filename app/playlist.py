@@ -6,12 +6,12 @@ from itertools import chain
 import plotly.express as px
 
 #import api keys from api.py
-from app.api import client_id, client_secret
+from app.api import SPOTIPY_CLIENT_ID, SPOTIPY_CLIENT_SECRET
 
 #connect to spotify api
-client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
-sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
+client_credentials_manager = SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
 
+sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 def url_to_id(url):
     ## https://open.spotify.com/playlist/3QJAP3W7ONDac1qIdTsBRJ?si=f8e17f22c0304ee2

@@ -8,5 +8,5 @@ from dotenv import load_dotenv
 load_dotenv() 
 ## 
 #to access to spotify api, you need client_id, client_secret
-client_id = os.getenv("CLIENT_ID")
-client_secret =os.getenv("CLIENT_SECRET")
+SPOTIPY_CLIENT_ID = os.getenv("SPOTIPY_CLIENT_ID")
+SPOTIPY_CLIENT_SECRET =os.getenv("SPOTIPY_CLIENT_SECRET")
