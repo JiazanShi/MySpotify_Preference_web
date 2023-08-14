@@ -4,7 +4,16 @@ This is a platform used to analyze user's Spotify playlist data, including user'
 
 ## Setup
 
-create vitual environment:
+To get access to Spotify API, you need to apply a developer account, and get your client_id and client_secret. Please pass your client_id and client_secret in the .env file.
+
+```sh
+# this is the ".env" file (in the root directory of the repo)
+
+SPOTIFY_CLIENT_ID="____________"
+SPOTIFY_CLIENT_SECRET="____________"
+```
+
+create vitual environment for the app:
 
 ```sh
 conda create -n spotipy-env python=3.10
@@ -23,12 +32,12 @@ pip install -r requirements.txt
 
 ## CLI Usage
 
-run playlist.py and return playlist info:
+run playlist.py (return tracks in the playlist, and tracks popularity details):
 ```sh
 python -m app.playlist
 ```
 
-run artist.py:
+run artist.py that tells you what are the high-frequent artists and genres in this playlist:
 ```sh
 python -m app.artist
 ```
@@ -36,6 +45,13 @@ python -m app.artist
 run audio.py and get audio features:
 ```sh
 python -m app.audio
+```
+## Test
+
+To test the app, run pytest in the terminal with virtual environment:
+
+```sh
+pytest
 ```
 
 ## Web
@@ -48,8 +64,25 @@ The 'Artists' page tells you who is the most welcomed artist in the playlist, an
 
 The 'Audio Features' page gives you the average audio features in this playlist, such as danceability and liveness.
 
-
 ```sh
 FLASK_APP=web_app flask run
 ```
+
+## Deploy
+
+Login to [Render](https://dashboard.render.com) and visit the dashboard.
+
+Create a New "Web Service". Choose your own repository by specifying its public URL (at the bottom of the page).
+
+Specify start command:
+
+```
+gunicorn "web_app:create_app()"
+```
+
+Choose instance type of "free".
+
+Under the "Advanced" options, set your client_id and client_secret as environment variables.
+
+Finally, click to "Create" the web service.
 
