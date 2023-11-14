@@ -26,7 +26,10 @@ def fetch_artists(playlist_df):
     for id in my_artists['artist_id']:
         artist = sp.artist(id)
         artist_popularity.append(artist['popularity'])
-        artist_genres.append(artist['genres'][0])
+        try:
+            artist_genres.append(artist['genres'][0])
+        except:
+            artist_genres.append('')
         artist_followers.append(artist['followers']['total'])
 
     my_artists = my_artists.assign(artist_popularity=artist_popularity,

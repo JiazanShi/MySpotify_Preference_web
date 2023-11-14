@@ -47,8 +47,8 @@ def artist_info():
 
         #treemap artist
         fig = px.treemap(artists, path=['artist_name'], values='preference',
-                 color='artist_genres', width=500, height=500,
-                 title="Artists in the playlist")
+                 color='artist_genres', title="Artists in the playlist")
+        fig.update_layout(autosize=True,width=500,height=600)
         artist_treemap_html = fig.to_html(full_html=False, include_plotlyjs='cdn')
 
         fig2 = px.pie(names=top5_genres.keys(), values=top5_genres.values(), title="Top Genres")
