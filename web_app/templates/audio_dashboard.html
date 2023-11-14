@@ -5,17 +5,39 @@
 
     <h2>Audio Dashboard </h2>
 
-    <p class="lead">You're getting access to {{ owner }} 's playlist {{ name }}, {{num_tracks}} songs in it </p>
+    <p class="lead">Here is the analysis for music audio features in the {{ owner }} 's playlist {{ name }}.</p>
 
+    <!--
     <div id="chart-container" height="700px"></div>
     <div id="chart-container">
         {{ chart_html | safe }}
+    </div>
+    -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="chart-container">
+                    <div>
+                        {{ polar_chart | safe }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div class="chart-container">
+                    <div>
+                        {{ box_chart | safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!--
         BOOTSTRAP TABLES
         https://getbootstrap.com/docs/5.0/content/tables/
-    -->
+    
     <table class="table table-hover table-responsive caption-top">
         <caption>Feature Data</caption>
         <thead>
@@ -26,10 +48,7 @@
         </thead>
         <tbody>
 
-        <!--
-            JINJA FOR LOOP
-            https://jinja.palletsprojects.com/en/3.1.x/templates/
-        -->
+       
         {% for row in data %}
             <tr>
                 <td>{{ row["feature"] }}</td>
@@ -39,6 +58,7 @@
 
         </tbody>
     </table>
+    -->
 
     
 {% endblock %}

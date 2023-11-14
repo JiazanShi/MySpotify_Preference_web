@@ -26,7 +26,7 @@ def fetch_artists(playlist_df):
     for id in my_artists['artist_id']:
         artist = sp.artist(id)
         artist_popularity.append(artist['popularity'])
-        artist_genres.append(artist['genres'])
+        artist_genres.append(artist['genres'][0])
         artist_followers.append(artist['followers']['total'])
 
     my_artists = my_artists.assign(artist_popularity=artist_popularity,
@@ -36,7 +36,7 @@ def fetch_artists(playlist_df):
     return my_artists
 
 def artist_genres(my_artists):
-    genre_list = list(chain.from_iterable(my_artists['artist_genres']))
+    genre_list = list(my_artists['artist_genres'])
     genre_dict = pd.Series(genre_list).value_counts().to_dict()
 
     return genre_dict

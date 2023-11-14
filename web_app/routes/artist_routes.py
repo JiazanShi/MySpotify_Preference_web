@@ -40,19 +40,25 @@ def artist_info():
 
 
         #plot bar chart for artists
-        fig = px.bar(artists, x='artist_name', y='preference' ,title=f"My Favorite Artists")
-        fig.update_traces(marker_color='green')
-        fig.update_layout(xaxis={'categoryorder':'total descending'})
-        artist_bar_html = fig.to_html(full_html=False, include_plotlyjs='cdn')
+        #fig = px.bar(artists, x='artist_name', y='preference' ,title=f"My Favorite Artists")
+        #fig.update_traces(marker_color='green')
+        #fig.update_layout(xaxis={'categoryorder':'total descending'})
+        #artist_bar_html = fig.to_html(full_html=False, include_plotlyjs='cdn')
 
-        fig2 = px.pie(names=top5_genres.keys(), values=top5_genres.values(),title="Genres")
+        #treemap artist
+        fig = px.treemap(artists, path=['artist_name'], values='preference',
+                 color='artist_genres', width=500, height=500,
+                 title="Artists in the playlist")
+        artist_treemap_html = fig.to_html(full_html=False, include_plotlyjs='cdn')
+
+        fig2 = px.pie(names=top5_genres.keys(), values=top5_genres.values(), title="Top Genres")
         genres_html = fig2.to_html(full_html=False, include_plotlyjs='cdn')
 
         #flash("Fetched Real-time Market Data!", "success")
         return render_template("artists.html",
             artists=artists,
             genres=genres,
-            artist_chart=artist_bar_html,
+            artist_chart=artist_treemap_html,
             genre_chart=genres_html
         )
     except Exception as err:

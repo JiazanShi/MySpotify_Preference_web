@@ -7,18 +7,41 @@
 
     <p class="lead">Here is the favorite artists and genres in this playlist</p>
 
+<!--
     <div id="chart-container" height="700px"></div>
 
     <p>Artists in this playlist</p>
     <div id="chart-container">
         {{ artist_chart | safe }}
     </div>
-
-
     <p>Genres in this playlist</p>
     <div id="chart-container">
         {{ genre_chart | safe }}
     </div>
+-->
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <div>
+                        {{ artist_chart | safe }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <div>
+                        {{ genre_chart | safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 
     

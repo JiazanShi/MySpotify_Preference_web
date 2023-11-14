@@ -34,15 +34,15 @@ def playlist_info():
 
 
         #plot bar chart for songs popularity
-        fig = px.bar(df, x='track_id', y='track_popularity',title="Popularity of songs in the playlist")
-        fig.update_xaxes(
-            tickvals=df['track_id'],  
-            ticktext=df['track_name'],  
-            tickmode='array'
-        )
-        fig.update_traces(marker_color='green')
-        fig.update_layout(xaxis={'categoryorder':'total descending'})
-        songs_bar_html = fig.to_html(full_html=False, include_plotlyjs='cdn')
+        #fig = px.bar(df, x='track_id', y='track_popularity',title="Popularity of songs in the playlist")
+        #fig.update_xaxes(
+        #    tickvals=df['track_id'],  
+        #    ticktext=df['track_name'],  
+        #    tickmode='array'
+        #)
+        #fig.update_traces(marker_color='green')
+        #fig.update_layout(xaxis={'categoryorder':'total descending'})
+        #songs_bar_html = fig.to_html(full_html=False, include_plotlyjs='cdn')
 
         #flash("Fetched Real-time Market Data!", "success")
         return render_template("playlist_details.html",
@@ -50,7 +50,7 @@ def playlist_info():
             owner=owner,
             num_tracks=num_tracks,
             data=data,
-            chart_html=songs_bar_html
+            #chart_html=songs_bar_html
         )
     except Exception as err:
         print('OOPS', err)

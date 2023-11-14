@@ -37,7 +37,14 @@ def audio_dashboard():
         #plot polar chart
         fig = px.line_polar(r=avg_data.value, theta=avg_data.feature, line_close=True)
         fig.update_traces(line_color='green')
-        chart_html = fig.to_html(full_html=False, include_plotlyjs='cdn')
+        polar_html = fig.to_html(full_html=False, include_plotlyjs='cdn')
+
+        #box plot
+        fig2 = px.box(data, y=music_feature)
+        fig2.update_traces(marker_color='green')
+        box_html = fig2.to_html(full_html=False, include_plotlyjs='cdn')
+
+        
 
         #flash("Fetched Real-time Market Data!", "success")
         return render_template("audio_dashboard.html",
@@ -45,7 +52,8 @@ def audio_dashboard():
             owner=owner,
             num_tracks=num_tracks,
             data=data_dict,
-            chart_html=chart_html
+            polar_chart=polar_html,
+            box_chart=box_html
         )
     except Exception as err:
         print('OOPS', err)
